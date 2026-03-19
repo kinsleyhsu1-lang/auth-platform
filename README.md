@@ -1,6 +1,6 @@
 # Auth Service (Express + Postgres)
 
-[![CI](https://github.com/your-username/your-project/actions/workflows/ci.yml/badge.svg)](https://github.com/your-username/your-project/actions/workflows/ci.yml)
+[![CI](https://github.com/kinsleyhsu1-lang/auth-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/kinsleyhsu1-lang/auth-platform/actions/workflows/ci.yml)
 
 A simple auth service with:
 - Register + email verification
@@ -20,6 +20,20 @@ Quick start:
 - Copy `.env.example` to `.env` and set `DATABASE_URL` + secrets
 - Run migrations (see Setup below)
 - `npm run dev`
+
+Quick demo:
+
+```bash
+curl -X POST http://localhost:3000/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"demo@test.com","name":"Demo","password":"StrongPass#123"}'
+
+curl -X POST http://localhost:3000/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"demo@test.com","password":"StrongPass#123"}'
+
+curl -H "Authorization: Bearer <access_token>" http://localhost:3000/me
+```
 
 ## Setup
 
@@ -64,6 +78,20 @@ EXPOSE_REFRESH_TOKEN=true
 CSRF_COOKIE_NAME=csrf_token
 CSRF_HEADER_NAME=x-csrf-token
 ```
+
+### 2b) Production hardening
+
+Create `.env.production` and use stricter values:
+
+```ini
+COOKIE_SECURE=true
+COOKIE_SAMESITE=strict
+AUTH_RATE_LIMIT_WINDOW_MS=900000
+AUTH_RATE_LIMIT_MAX=10
+LOG_LEVEL=info
+```
+
+If you run behind a proxy/load balancer, set `TRUST_PROXY=true` and configure Express to trust the proxy.
 
 ### 3) Run migrations
 
