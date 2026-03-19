@@ -227,6 +227,26 @@ curl http://localhost:3000/status
 
 See `CHANGELOG.md` and `RELEASE.md` for versioning and release checklist.
 
+## Deploy (Render)
+
+1. Create a new Render Web Service from this repo.
+2. Render will pick up `render.yaml` automatically.
+3. After deploy, run migrations once:
+
+```bash
+psql "$DATABASE_URL" -f ./migrations.sql
+psql "$DATABASE_URL" -f ./migrations_step2.sql
+psql "$DATABASE_URL" -f ./migrations_step3.sql
+psql "$DATABASE_URL" -f ./migrations_step4.sql
+psql "$DATABASE_URL" -f ./migrations_step6.sql
+```
+
+4. Verify the health endpoint:
+
+```bash
+curl https://<your-render-service>.onrender.com/health
+```
+
 ## CI Secrets (GitHub Actions)
 
 Add these repository secrets for CI if you want to test with real SendGrid:\n\n- `SENDGRID_API_KEY`\n- `SENDGRID_FROM_EMAIL`

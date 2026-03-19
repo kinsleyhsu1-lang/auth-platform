@@ -1,0 +1,67 @@
+services:
+  - type: web
+    name: auth-platform
+    env: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: auth-platform-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: REFRESH_TOKEN_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 15m
+      - key: JWT_ISSUER
+        value: production
+      - key: JWT_AUDIENCE
+        value: auth-platform
+      - key: REFRESH_TTL_DAYS
+        value: 30
+      - key: VERIFY_TTL_HOURS
+        value: 24
+      - key: RESET_TTL_HOURS
+        value: 1
+      - key: LOCKOUT_THRESHOLD
+        value: 5
+      - key: LOCKOUT_WINDOW_MINUTES
+        value: 15
+      - key: LOCKOUT_DURATION_MINUTES
+        value: 15
+      - key: AUTH_RATE_LIMIT_WINDOW_MS
+        value: 900000
+      - key: AUTH_RATE_LIMIT_MAX
+        value: 10
+      - key: CLEANUP_INTERVAL_MS
+        value: 3600000
+      - key: LOG_LEVEL
+        value: info
+      - key: USE_REFRESH_COOKIE
+        value: true
+      - key: EXPOSE_REFRESH_TOKEN
+        value: false
+      - key: COOKIE_SECURE
+        value: true
+      - key: COOKIE_SAMESITE
+        value: strict
+      - key: CSRF_COOKIE_NAME
+        value: csrf_token
+      - key: CSRF_HEADER_NAME
+        value: x-csrf-token
+      - key: APP_BASE_URL
+        value: https://auth-platform.onrender.com
+      - key: SENDGRID_ENABLED
+        value: false
+      - key: SENDGRID_SANDBOX_MODE
+        value: false
+
+databases:
+  - name: auth-platform-db
+    plan: free
+    databaseName: auth_platform
+    user: auth_platform
