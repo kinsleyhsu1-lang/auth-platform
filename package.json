@@ -1,0 +1,57 @@
+{
+  "name": "auth-service",
+  "version": "1.0.0",
+  "description": "Express + Postgres auth service with JWT, refresh rotation, email verification, and password reset",
+  "main": "index.js",
+  "type": "commonjs",
+  "files": [
+    "index.js",
+    "db.js",
+    "migrations*.sql",
+    "scripts/**",
+    "tests/**",
+    "README.md",
+    "CHANGELOG.md",
+    "RELEASE.md",
+    "eslint.config.cjs",
+    "jest.config.js",
+    ".env.example"
+  ],
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "test": "NODE_OPTIONS= NODE_NO_WARNINGS=1 DOTENV_CONFIG_QUIET=true LOG_LEVEL=error jest",
+    "test:coverage": "NODE_OPTIONS= NODE_NO_WARNINGS=1 DOTENV_CONFIG_QUIET=true LOG_LEVEL=error jest --coverage --coverageThreshold '{\"global\": {\"branches\": 65, \"functions\": 84, \"lines\": 77, \"statements\": 76}}'",
+    "lint": "eslint index.js db.js tests",
+    "lint:fix": "eslint index.js db.js tests --fix",
+    "release": "node scripts/release.js",
+    "prepublishOnly": "npm run lint && npm test"
+  },
+  "keywords": [],
+  "author": "Kinsley",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kinsleyhsu1-lang/auth-platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kinsleyhsu1-lang/auth-platform/issues"
+  },
+  "homepage": "https://github.com/kinsleyhsu1-lang/auth-platform#readme",
+  "dependencies": {
+    "@sendgrid/mail": "^8.1.6",
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.19.0"
+  },
+  "devDependencies": {
+    "eslint": "^10.0.3",
+    "jest": "^30.3.0",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.2.2"
+  }
+}
