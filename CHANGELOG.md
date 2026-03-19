@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+
+- (none)
+
+## [1.0.0] - 2026-03-19
 - Add CSRF protection for refresh/logout when cookies are used
 - Add account lockout after repeated login failures
 - Add per-user refresh token salt and lookup hash
