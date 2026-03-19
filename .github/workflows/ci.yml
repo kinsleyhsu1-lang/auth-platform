@@ -40,6 +40,7 @@ jobs:
       - name: Set env
         run: |
           echo "DATABASE_URL=postgres://kinsley:password@localhost:5432/kinsley" >> .env
+          echo "DATABASE_URL=postgres://kinsley:password@localhost:5432/kinsley" >> $GITHUB_ENV
           echo "JWT_SECRET=test-secret" >> .env
           echo "JWT_EXPIRES_IN=15m" >> .env
           echo "JWT_ISSUER=local-dev" >> .env
