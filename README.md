@@ -11,6 +11,16 @@ A simple auth service with:
 - Rate limiting
 - Structured logs
 
+## Getting Started
+
+Grab the latest release here: [v1.0.0](https://github.com/kinsleyhsu1-lang/auth-platform/releases/tag/v1.0.0)
+
+Quick start:
+- `npm install`
+- Copy `.env.example` to `.env` and set `DATABASE_URL` + secrets
+- Run migrations (see Setup below)
+- `npm run dev`
+
 ## Setup
 
 ### 1) Install dependencies
